@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {AiOutlineHeart} from "react-icons/ai"
-import { Img, ImgWrapper, Button } from './styles'
+import { Article,Img, ImgWrapper, Button } from './styles'
 
 export const PhotoCard = ({id, likes, src }) => {
 
@@ -8,22 +8,35 @@ export const PhotoCard = ({id, likes, src }) => {
 
     const [amountLikes,setAmountLikes] = useState(likesState)
 
-    // console.log(amountLikes)
-
     const handleLike = () => {
         setAmountLikes(amountLikes+1)
     }
+
+    const ref = useRef('')
+
+    const [isShown, setIsShown] = useState()
+
+    useEffect(()=>{
+            const observer = new window.IntersectionObserver((e)=>{
+                const shown = e[0].isIntersecting
+                shown && setIsShown (true)
+            })
+            observer.observe(ref.current)
+    },[ref])
+
+    console.log(isShown)
+
     return (
-    <article>
-        <a href={`/detail/${id}`}>
+    <Article ref={ref}>
+        {isShown ? (<a href={`/detail/${id}`}>
             <ImgWrapper>
                 <Img src={src}/>
             </ImgWrapper>
-        </a>
+        </a>) : <></> }
         <Button onClick={(handleLike)}> 
             <AiOutlineHeart/> 
             {amountLikes} Likes!
         </Button>
-    </article>
+    </Article>
 )
 }

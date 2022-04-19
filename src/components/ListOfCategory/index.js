@@ -12,7 +12,6 @@ export const ListOfCategory = () => {
         const handleFixed = e => {
             const Fixed = window.scrollY > 200
             isFixed !== Fixed && setIsFixed(Fixed)
-            console.log(isFixed)
         }
         document.addEventListener('scroll',handleFixed);
         return()=>document.removeEventListener('scroll',handleFixed)
