@@ -1,14 +1,26 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Category } from '../Category'
 import { List,ListItem } from './styles'
 import {categories} from '../../../api/db.json'
 
+
 export const ListOfCategory = () => {
-console.log(categories)
-    
-    return (
-    
-    <List>
+
+    const [isFixed, setIsFixed] =useState(false)
+
+    useEffect (()=>{
+        const handleFixed = e => {
+            const Fixed = window.scrollY > 200
+            isFixed !== Fixed && setIsFixed(Fixed)
+            console.log(isFixed)
+        }
+        document.addEventListener('scroll',handleFixed);
+        return()=>document.removeEventListener('scroll',handleFixed)
+    })
+
+    const renderList = (fixed) =>{
+        return(
+        <List className={fixed?'fixed' : ''}>
         {
         categories.map(category=>(
             <ListItem key={category.id}>
@@ -16,6 +28,15 @@ console.log(categories)
             </ListItem>
         ))
     }
-    </List>
+    </List>)
+    }
+
+
+    return (
+        <>
+            {renderList()}
+            {isFixed && renderList(true)}
+        </>
+
 )
 }

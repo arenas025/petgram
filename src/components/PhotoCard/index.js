@@ -8,7 +8,7 @@ export const PhotoCard = ({id, likes, src }) => {
 
     const [amountLikes,setAmountLikes] = useState(likesState)
 
-    console.log(amountLikes)
+    // console.log(amountLikes)
 
     const handleLike = () => {
         setAmountLikes(amountLikes+1)
