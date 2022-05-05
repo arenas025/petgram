@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
+    "lint":"standard",
     "start": "webpack serve --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,13 +27,24 @@
     "babel-loader": "^8.2.4",
     "html-webpack-plugin": "^5.5.0",
     "react-icons": "^4.3.1",
+    "standard": "^17.0.0",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.2",
+    "graphql": "^16.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "styled-components": "^5.3.5"
+  },
+  "standard":{
+    "ignore":[
+      "/api/**"
+    ]
+  },
+  "eslintConfig": {
+    "extends":["./node_modules/standard/eslintrc.json"]
   }
 }
